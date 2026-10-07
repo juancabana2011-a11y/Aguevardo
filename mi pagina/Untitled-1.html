@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi página</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      background: #202124;
+      font-family: Arial, sans-serif;
+    }
+
+    .marco {
+      width: min(500px, 100%);
+      margin: auto;
+      overflow: hidden;
+      border-radius: 7px;
+      background: white;
+    }
+
+    .barra {
+      padding: 11px;
+      background: #eee;
+      color: #333;
+      font-size: 13px;
+    }
+
+    .escena {
+      position: relative;
+      min-height: 480px;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: #333;
+    }
+
+    #imagen {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .fondo-modal {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      display: grid;
+      padding: 20px;
+      place-items: center;
+      background: #0002;
+    }
+
+    .fondo-modal[hidden] {
+      display: none;
+    }
+
+    .modal {
+      width: min(340px, 100%);
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      background: #f7f7f7;
+      color: #222;
+      box-shadow: 0 8px 28px #0006;
+    }
+
+    .modal-cabecera {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      font-size: 13px;
+    }
+
+    .modal-mensaje {
+      padding: 18px 14px;
+    }
+
+    .modal-pie {
+      padding: 0 14px 14px;
+      text-align: right;
+    }
+
+    button {
+      padding: 8px 14px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="marco">
+    <div class="barra">● ● ●</div>
+
+    <section class="escena">
+      <img id="imagen" src="foto.jpg" alt="Foto">
+
+      <div class="fondo-modal" id="fondo-modal">
+        <section class="modal">
+          <div class="modal-cabecera">
+            <span>frenton.js</span>
+            <button id="cerrar" type="button" aria-label="Cerrar">×</button>
+          </div>
+
+          <div class="modal-mensaje" id="mensaje"></div>
+
+          <div class="modal-pie">
+            <button id="aceptar" type="button">Aceptar</button>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const mensajes = [
+      "¡Creías que podías desafiar al Estado????!",
+      "Bienvenido a la patria Milagro"
+    ];
+
+    const mensaje = document.getElementById("mensaje");
+    const fondoModal = document.getElementById("fondo-modal");
+    let mensajeActual = 0;
+
+    mensaje.textContent = mensajes[mensajeActual];
+
+    document.getElementById("aceptar").addEventListener("click", () => {
+      mensajeActual++;
+
+      if (mensajeActual < mensajes.length) {
+        mensaje.textContent = mensajes[mensajeActual];
+      } else {
+        fondoModal.hidden = true;
+      }
+    });
+
+    document.getElementById("cerrar").addEventListener("click", () => {
+      fondoModal.hidden = true;
+    });
+  </script>
+</body>
+</html>
